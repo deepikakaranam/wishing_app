@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>wishing app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet", href="{% static 'wishing_app/styles/style.css' %}">
+</head>
+<body>
+    <h1>Welcome Sign in to make a wish!</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <div class="container">
+        <h1>Register</h1>
+        <form action="/process/" method = 'post'>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="first_name" placeholder="First name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                        
+                    <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                
+                    <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="Password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                
+                    <input type="password" class="form-control" name="confirm_password" id="inputPassword4" placeholder="confirm_Password">
+                </div>
+            </div>
+            
+                
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1>Login Here</h1>
+    <form action="/login/" method = 'post'>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                    
+            <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                
+                <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="Password">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    </div>
+
+</body>
+</html>

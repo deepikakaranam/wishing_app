@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>wishing app</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet", href="{% static 'wishing_app/styles/style.css' %}">
+    </head>
+    <body>
+        <div class="links">
+            <a href="/logout" class="btn btn-default">logout</a>
+            
+        </div>
+        <h1>Hello User! Make a wish!</h1>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="/{{wish.id}}/update/" method = 'post'>
+            {% csrf_token %}
+            <div class="box">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">I Wish For : </label>
+                        <input type="text" class="form-control" name="wish" id="exampleFormControlInput1" value="{{wish.wish}}">
+        
+                    </div>
+            
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlInput1">Description </label>
+                        <input type="text" class="form-control" name="description" id="exampleFormControlInput1" value="{{wish.desc}}">
+        
+                    </div>
+                </div>
+                    
+                <button><a href="/dashboard" class="btn btn-primary">Cancel</a></button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </body>

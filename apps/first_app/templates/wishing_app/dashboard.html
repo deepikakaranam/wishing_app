@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>wishing app</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet", href="{% static 'wishing_app/styles/style.css' %}">
+    </head>
+    <body>
+        
+        
+        <h1>Hello {{user.first_name}}</h1>
+        <div class="links">
+            <a href="/logout" class="btn btn-default">logout</a>
+            <button><a href="/stats" class="btn btn-default">View Stats</a></button>
+            <button><a href="/create" class="btn btn-default">Make A Wish</a></button>
+        </div>
+        <h3>Your wish list</h3>
+        
+        <table border=2>
+            <tr>
+                <th>Item</th>
+                <th>Date added</th>
+                <th>Actions</th>
+                
+            </tr>
+            {% for wish in wishes%}
+            <tr>
+                {% if wish.grant_status == "not_granted" %}
+                <td>{{wish.wish}}</td>
+                <td>{{wish.created_at}}</td>
+                <td><a href="/{{wish.id}}/destroy" class="btn btn-default">remove</a>, 
+                <a href="/{{wish.id}}/edit" class="btn btn-default">Edit</a>, 
+                <a href="/{{wish.id}}/grant" class="btn btn-default">grant</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Granted wishes</h3>
+        
+        <table border=2>
+            <tr>
+                <th>Item</th>
+                <th>wisher</th>
+                <th>Date added</th>
+                <th>Date granted</th>
+                <th>Likes</th>
+                <th>Actions</th>
+                
+            </tr>
+            {% for wishes in granted_wish %}
+            <tr>
+                <td>{{wishes.wish}}</td>
+                <td>{{wishes.user.first_name}}</td>
+                <td>{{wishes.created_at}}</td>
+                <td>{{wishes.updated_at}}</td>
+                <td>{{wishes.user_liked.count}}</td>
+                {% if wishes.user.id != request.session.user_id %}
+                <td><a href="/{{wishes.id}}/like" class="btn btn-default">Like</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+            
+
+    </body>
+</html>

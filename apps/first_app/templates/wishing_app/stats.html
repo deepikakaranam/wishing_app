@@ -1,0 +1,25 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>wishing app</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet", href="{% static 'wishing_app/styles/style.css' %}">
+    </head>
+    <body>
+        <div class="links">
+            <a href="/logout" class="btn btn-default">logout</a>
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            
+        </div>
+        <h1>hello {{user.first_name}} These are your stats!</h1>
+        <p>Total wishes granted so far for all users:{{grants}}</p>
+        
+        <p>your granted wishes:{{wishes}}</p>
+        <p>your not granted wishes:{{no_wishes}}</p>
+       
+        
+        
+    </body>

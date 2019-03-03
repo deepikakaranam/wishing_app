@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+}
+.container{
+    border:2px solid black;
+    background-color: cornsilk;
+    width:450px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+
+.messages{
+    color:red;
+}
+.links{
+    float:right;
+}
